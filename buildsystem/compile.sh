@@ -250,7 +250,8 @@ fi
 if [ ! -d "gradle/wrapper" ]; then
     diagnostic "Downloading gradle"
     GRADLE_VERSION=6.5
-    GRADLE_URL=https://download.videolan.org/pub/contrib/gradle/gradle-${GRADLE_VERSION}-bin.zip
+    #GRADLE_URL=https://download.videolan.org/pub/contrib/gradle/gradle-${GRADLE_VERSION}-bin.zip
+    GRADLE_URL=https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}-bin.zip
     wget ${GRADLE_URL} 2>/dev/null || curl -O ${GRADLE_URL} || fail "gradle: download failed"
 
     unzip -o gradle-${GRADLE_VERSION}-bin.zip || fail "gradle: unzip failed"
@@ -270,16 +271,17 @@ fi
 ####################
 
 TESTED_HASH=72a6024e732e17964d390ee86bbed243781708e2
-VLC_REPOSITORY=https://git.videolan.org/git/vlc/vlc-3.0.git
+#VLC_REPOSITORY=https://git.videolan.org/git/vlc/vlc-3.0.git
+VLC_REPOSITORY=https://github.com/quink-black/vlc-3.0
 if [ ! -d "vlc" ]; then
     diagnostic "VLC sources: not found, cloning"
-    git clone "${VLC_REPOSITORY}" vlc || fail "VLC sources: git clone failed"
+    git clone -b patched "${VLC_REPOSITORY}" vlc || fail "VLC sources: git clone failed"
     cd vlc
     diagnostic "VLC sources: resetting to the TESTED_HASH commit (${TESTED_HASH})"
     git reset --hard ${TESTED_HASH} || fail "VLC sources: TESTED_HASH ${TESTED_HASH} not found"
     diagnostic "VLC sources: applying custom patches"
     # Keep Message-Id inside commits description to track them afterwards
-    git am --message-id ../libvlc/patches/vlc3/*.patch || fail "VLC sources: cannot apply custom patches"
+    # git am --message-id ../libvlc/patches/vlc3/*.patch || fail "VLC sources: cannot apply custom patches"
     cd ..
 else
     diagnostic "VLC source: found sources, leaving untouched"

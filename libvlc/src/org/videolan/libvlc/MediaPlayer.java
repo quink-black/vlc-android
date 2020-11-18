@@ -1293,6 +1293,10 @@ public class MediaPlayer extends VLCObject<MediaPlayer.Event> {
      */
     public native int setVolume(int volume);
 
+    public native int getChannel();
+
+    public native int setChannel(int channel);
+
     /**
      * Gets the current movie time (in ms).
      * @return the movie time (in ms), or -1 if there is no media.

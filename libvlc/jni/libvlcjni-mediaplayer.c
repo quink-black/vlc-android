@@ -420,6 +420,29 @@ Java_org_videolan_libvlc_MediaPlayer_setVolume(JNIEnv *env, jobject thiz,
     return (jint) libvlc_audio_set_volume(p_obj->u.p_mp, (int) volume);
 }
 
+jint
+Java_org_videolan_libvlc_MediaPlayer_getChannel(JNIEnv *env, jobject thiz)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+        return -1;
+
+    return (jint) libvlc_audio_get_channel(p_obj->u.p_mp);
+}
+
+jint
+Java_org_videolan_libvlc_MediaPlayer_setChannel(JNIEnv *env, jobject thiz,
+                                               jint channel)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+        return -1;
+
+    return (jint) libvlc_audio_set_channel(p_obj->u.p_mp, (int) channel);
+}
+
 jlong
 Java_org_videolan_libvlc_MediaPlayer_getTime(JNIEnv *env, jobject thiz)
 {

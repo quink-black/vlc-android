@@ -1295,6 +1295,23 @@ public class MediaPlayer extends VLCObject<MediaPlayer.Event> {
 
     public native int getChannel();
 
+    public enum AudioOutputChannelType {
+        AUDIO_CHANNEL_STEREO(1),
+        AUDIO_CHANNEL_RSTEREO(2),
+        AUDIO_CHANNEL_LEFT(3),
+        AUDIO_CHANNEL_RIGHT(4),
+        AUDIO_CHANNEL_DOLBYS(5);
+
+        public final int value;
+        AudioOutputChannelType(int value) {
+            this.value = value;
+        }
+    }
+
+    public int setChannel(AudioOutputChannelType channelType) {
+        return setChannel(channelType.value);
+    }
+
     public native int setChannel(int channel);
 
     /**

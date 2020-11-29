@@ -443,6 +443,18 @@ Java_org_videolan_libvlc_MediaPlayer_setChannel(JNIEnv *env, jobject thiz,
     return (jint) libvlc_audio_set_channel(p_obj->u.p_mp, (int) channel);
 }
 
+jint
+Java_org_videolan_libvlc_MediaPlayer_setPitchShift(JNIEnv *env, jobject thiz,
+                                               float pitch)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+        return -1;
+
+    return (jint) libvlc_audio_set_pitch_shift(p_obj->u.p_mp, pitch);
+}
+
 jlong
 Java_org_videolan_libvlc_MediaPlayer_getTime(JNIEnv *env, jobject thiz)
 {

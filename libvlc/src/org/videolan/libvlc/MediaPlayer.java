@@ -1315,6 +1315,13 @@ public class MediaPlayer extends VLCObject<MediaPlayer.Event> {
     public native int setChannel(int channel);
 
     /**
+     * add pitch shift
+     * @param pitch: in the range of -12 to 12
+     * @return
+     */
+    public native int setPitchShift(float pitch);
+
+    /**
      * Gets the current movie time (in ms).
      * @return the movie time (in ms), or -1 if there is no media.
      */
